@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
 // Create axios instance
 const axiosClient = axios.create({
@@ -11,11 +11,13 @@ const axiosClient = axios.create({
     },
 });
 
-// Request interceptor - add auth token if needed
+// Request interceptor - add auth token if present
 axiosClient.interceptors.request.use(
     (config) => {
-        // Token is already in cookies (httpOnly), so no need to add it manually
-        // But this is where you could add other headers if needed
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
         return config;
     },
     (error) => {
@@ -32,6 +34,7 @@ axiosClient.interceptors.response.use(
         // Handle 401 Unauthorized - token expired or invalid
         if (error.response && error.response.status === 401) {
             localStorage.removeItem('user');
+            localStorage.removeItem('token');
             const isAuthMeReq = error.config?.url?.includes('/api/auth/me');
             if (!isAuthMeReq && window.location.pathname !== '/login') {
                 window.dispatchEvent(new CustomEvent('unauthorized'));
@@ -44,7 +47,6 @@ axiosClient.interceptors.response.use(
                 window.dispatchEvent(new CustomEvent('forbidden'));
             }
         }
-
 
         return Promise.reject(error);
     }

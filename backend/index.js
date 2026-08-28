@@ -16,16 +16,18 @@ import timetableRoutes from "./routes/timetable.routes.js";
 dotenv.config();
 const app = express();
 
-// Database connection
+// Database & Cloudinary connection
 import connectDB from "./config/db.js";
-connectDB();
-// cloudinary connection
 import connectCloudinary from "./config/cloudinary.js";
-connectCloudinary();
-
-// SEED ADMIN
 import seedAdmin from "./utils/adminSeeder.js";
-seedAdmin();
+
+const initializeServices = async () => {
+    await connectDB();
+    connectCloudinary();
+    await seedAdmin();
+};
+initializeServices();
+
 
 // middlewares
 app.use(express.json());

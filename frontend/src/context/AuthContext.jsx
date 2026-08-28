@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
             } catch (err) {
                 // User is not authenticated or token is invalid
                 localStorage.removeItem('user');
+                localStorage.removeItem('token');
                 setUser(null);
             } finally {
                 setLoading(false);
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }) => {
         const handleUnauthorized = () => {
             setUser(null);
             localStorage.removeItem('user');
+            localStorage.removeItem('token');
         };
 
         window.addEventListener('unauthorized', handleUnauthorized);
@@ -50,6 +52,9 @@ export const AuthProvider = ({ children }) => {
             if (response.data.success && response.data.user) {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
+                if (response.data.token) {
+                    localStorage.setItem('token', response.data.token);
+                }
                 return { success: true, user: response.data.user };
             }
             throw new Error('Login failed');
@@ -60,6 +65,7 @@ export const AuthProvider = ({ children }) => {
         } finally {
             setLoading(false);
         }
+
     }, []);
 
     const logout = useCallback(async () => {
@@ -68,6 +74,7 @@ export const AuthProvider = ({ children }) => {
             await authAPI.logout();
             setUser(null);
             localStorage.removeItem('user');
+            localStorage.removeItem('token');
             return { success: true };
         } catch (err) {
             const message = err.response?.data?.message || err.message || 'Logout failed';
