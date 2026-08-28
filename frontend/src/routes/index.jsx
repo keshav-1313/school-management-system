@@ -40,11 +40,11 @@ export const AppRoutes = () => {
                 }
             />
 
-            {/* Admin Routes */}
+            {/* Management Routes (Admin, Teacher, Student) */}
             <Route
                 path="/students"
                 element={
-                    <ProtectedRoute requiredRole="admin">
+                    <ProtectedRoute requiredRole={['admin', 'teacher', 'student']}>
                         <StudentsPage />
                     </ProtectedRoute>
                 }
@@ -53,7 +53,7 @@ export const AppRoutes = () => {
             <Route
                 path="/teachers"
                 element={
-                    <ProtectedRoute requiredRole="admin">
+                    <ProtectedRoute requiredRole={['admin', 'teacher', 'student']}>
                         <TeachersPage />
                     </ProtectedRoute>
                 }
@@ -61,7 +61,7 @@ export const AppRoutes = () => {
             <Route
                 path="/classes"
                 element={
-                    <ProtectedRoute requiredRole="admin">
+                    <ProtectedRoute requiredRole={['admin', 'teacher', 'student']}>
                         <ClassesPage />
                     </ProtectedRoute>
                 }
@@ -69,7 +69,7 @@ export const AppRoutes = () => {
             <Route
                 path="/sections"
                 element={
-                    <ProtectedRoute requiredRole="admin">
+                    <ProtectedRoute requiredRole={['admin', 'teacher', 'student']}>
                         <SectionsPage />
                     </ProtectedRoute>
                 }
@@ -77,7 +77,7 @@ export const AppRoutes = () => {
             <Route
                 path="/subjects"
                 element={
-                    <ProtectedRoute requiredRole="admin">
+                    <ProtectedRoute requiredRole={['admin', 'teacher', 'student']}>
                         <SubjectsPage />
                     </ProtectedRoute>
                 }
@@ -95,7 +95,7 @@ export const AppRoutes = () => {
             <Route
                 path="/exams"
                 element={
-                    <ProtectedRoute requiredRole={['admin', 'teacher']}>
+                    <ProtectedRoute requiredRole={['admin', 'teacher', 'student']}>
                         <ExamsPage />
                     </ProtectedRoute>
                 }
