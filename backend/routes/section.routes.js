@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/create", protect, authorizeRoles("admin"), createSection);
 
-router.get("/:classId", protect, authorizeRoles("admin"), getSectionsByClass);
+router.get("/:classId", protect, authorizeRoles("admin", "teacher", "student"), getSectionsByClass);
 
 router.put("/:id", protect, authorizeRoles("admin"), updateSection);
 

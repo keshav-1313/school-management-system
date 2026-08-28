@@ -43,7 +43,11 @@ axiosClient.interceptors.response.use(
 
         // Handle 403 Forbidden - user doesn't have permission
         if (error.response && error.response.status === 403) {
-            if (window.location.pathname !== '/unauthorized') {
+            const isAuthMeReq = error.config?.url?.includes('/api/auth/me');
+            if (isAuthMeReq) {
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+            } else if (window.location.pathname !== '/unauthorized') {
                 window.dispatchEvent(new CustomEvent('forbidden'));
             }
         }

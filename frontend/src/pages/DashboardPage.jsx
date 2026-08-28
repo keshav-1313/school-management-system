@@ -202,7 +202,7 @@ export const DashboardPage = () => {
                         <div className="flex flex-wrap items-center gap-2.5">
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-xs font-semibold text-blue-200">
                                 <Shield size={14} className="text-blue-400" />
-                                System Administrator
+                                {isAdmin ? 'System Administrator' : isTeacher ? 'Faculty Teacher' : 'Student Portal'}
                             </span>
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-xs font-medium text-emerald-300">
                                 <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span>
@@ -211,7 +211,7 @@ export const DashboardPage = () => {
                         </div>
 
                         <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight">
-                            Welcome back, {user?.name || 'Admin'}! 👋
+                            Welcome back, {user?.name || (isAdmin ? 'Admin' : isTeacher ? 'Teacher' : 'Student')}! 👋
                         </h1>
 
                         <p className="text-slate-300 text-sm max-w-xl leading-relaxed">

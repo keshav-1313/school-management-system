@@ -59,31 +59,19 @@ export const HomePage = () => {
 
                         {/* Auth Navigation Actions */}
                         <div className="hidden sm:flex items-center gap-3">
-                            {isAuthenticated ? (
-                                <Link
-                                    to="/dashboard"
-                                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-blue-500/20 active:scale-95 flex items-center gap-2"
-                                >
-                                    <span>Dashboard</span>
-                                    <ArrowRight size={14} />
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link
-                                        to="/login"
-                                        className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors"
-                                    >
-                                        Log In
-                                    </Link>
-                                    <Link
-                                        to="/login"
-                                        className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-blue-500/20 active:scale-95 flex items-center gap-2"
-                                    >
-                                        <span>Get Started</span>
-                                        <ArrowRight size={14} />
-                                    </Link>
-                                </>
-                            )}
+                            <Link
+                                to="/login"
+                                className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors"
+                            >
+                                Log In
+                            </Link>
+                            <Link
+                                to="/login"
+                                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-blue-500/20 active:scale-95 flex items-center gap-2"
+                            >
+                                <span>Get Started</span>
+                                <ArrowRight size={14} />
+                            </Link>
                         </div>
 
                         {/* Mobile Menu Toggle Button */}
@@ -105,20 +93,12 @@ export const HomePage = () => {
                         <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-sm font-semibold text-slate-700">How It Works</a>
 
                         <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-                            {isAuthenticated ? (
-                                <Link to="/dashboard" className="w-full text-center py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-sm">
-                                    Go to Dashboard
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link to="/login" className="w-full text-center py-2.5 bg-slate-100 text-slate-800 font-bold text-xs rounded-xl">
-                                        Log In
-                                    </Link>
-                                    <Link to="/login" className="w-full text-center py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-sm">
-                                        Get Started
-                                    </Link>
-                                </>
-                            )}
+                            <Link to="/login" className="w-full text-center py-2.5 bg-slate-100 text-slate-800 font-bold text-xs rounded-xl">
+                                Log In
+                            </Link>
+                            <Link to="/login" className="w-full text-center py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-sm">
+                                Get Started
+                            </Link>
                         </div>
                     </div>
                 )}
@@ -145,21 +125,19 @@ export const HomePage = () => {
 
                             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                                 <Link
-                                    to={isAuthenticated ? "/dashboard" : "/login"}
+                                    to="/login"
                                     className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-blue-500/25 active:scale-95 transition-all flex items-center justify-center gap-2"
                                 >
-                                    <span>{isAuthenticated ? "Go to Dashboard" : "Get Started Now"}</span>
+                                    <span>Get Started Now</span>
                                     <ArrowRight size={16} />
                                 </Link>
 
-                                {!isAuthenticated && (
-                                    <Link
-                                        to="/login"
-                                        className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold text-sm rounded-2xl shadow-xs transition-colors text-center"
-                                    >
-                                        Log In to Portal
-                                    </Link>
-                                )}
+                                <Link
+                                    to="/login"
+                                    className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold text-sm rounded-2xl shadow-xs transition-colors text-center"
+                                >
+                                    Log In to Portal
+                                </Link>
                             </div>
 
                             {/* Trust badges */}
@@ -555,10 +533,10 @@ export const HomePage = () => {
                     </p>
                     <div className="pt-2">
                         <Link
-                            to={isAuthenticated ? "/dashboard" : "/login"}
+                            to="/login"
                             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 hover:bg-blue-50 font-extrabold text-sm rounded-2xl shadow-xl active:scale-95 transition-all"
                         >
-                            <span>{isAuthenticated ? "Go to Dashboard" : "Get Started Now"}</span>
+                            <span>Get Started Now</span>
                             <ArrowRight size={18} />
                         </Link>
                     </div>

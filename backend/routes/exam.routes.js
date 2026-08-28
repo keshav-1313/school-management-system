@@ -9,8 +9,8 @@ import authorizeRoles from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, authorizeRoles("admin"), createExam);
-router.get("/", protect, authorizeRoles("admin", "teacher"), getAllExams);
+router.post("/", protect, authorizeRoles("admin", "teacher"), createExam);
+router.get("/", protect, authorizeRoles("admin", "teacher", "student"), getAllExams);
 router.delete("/:id", protect, authorizeRoles("admin"), deleteExam);
 
 export default router;
