@@ -14,15 +14,17 @@ export const markAttendance = async (req, res) => {
         }
 
         // teacher id
-        const teacherProfile = await TeacherProfile.findOne({
+        let teacherProfile = await TeacherProfile.findOne({
             user: req.user._id
         });
-        if (!teacherProfile) {
-            return res.status(404).json({
-                success: false,
-                message: "Teacher profile not found",
+        if (!teacherProfile && req.user.role === "teacher") {
+            teacherProfile = await TeacherProfile.create({
+                user: req.user._id,
+                qualification: "Faculty Member",
+                experience: 1,
             });
         }
+        const teacherIdToSave = teacherProfile ? teacherProfile._id : req.user._id;
 
         // save attendance
         const attendanceRecords = [];
@@ -32,7 +34,7 @@ export const markAttendance = async (req, res) => {
                 class: classId,
                 section: sectionId,
                 subject: subjectId,
-                teacher: teacherProfile.id,
+                teacher: teacherIdToSave,
                 status: item.status,
                 remarks: item.remarks || "",
             });
