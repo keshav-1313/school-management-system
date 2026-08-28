@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.post("/", protect, authorizeRoles("admin", "teacher"), createExam);
 router.get("/", protect, authorizeRoles("admin", "teacher", "student"), getAllExams);
-router.delete("/:id", protect, authorizeRoles("admin"), deleteExam);
+router.delete("/:id", protect, authorizeRoles("admin", "teacher"), deleteExam);
 
 export default router;

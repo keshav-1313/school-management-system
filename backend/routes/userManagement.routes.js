@@ -14,10 +14,10 @@ import authorizeRoles from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
-router.post("/student", protect, authorizeRoles("admin"), createStudent);
+router.post("/student", protect, authorizeRoles("admin", "teacher"), createStudent);
 router.get("/students", protect, authorizeRoles("admin", "teacher", "student"), getAllStudents);
-router.put("/student/:id", protect, authorizeRoles("admin"), updateStudent);
-router.delete("/student/:id", protect, authorizeRoles("admin"), deleteStudent);
+router.put("/student/:id", protect, authorizeRoles("admin", "teacher"), updateStudent);
+router.delete("/student/:id", protect, authorizeRoles("admin", "teacher"), deleteStudent);
 
 router.post("/teacher", protect, authorizeRoles("admin"), createTeacher);
 router.get("/teachers", protect, authorizeRoles("admin", "teacher", "student"), getAllTeachers);

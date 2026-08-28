@@ -5,11 +5,11 @@ import authorizeRoles from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
-router.post("/create", protect, authorizeRoles("admin"), createSection);
+router.post("/create", protect, authorizeRoles("admin", "teacher"), createSection);
 
 router.get("/:classId", protect, authorizeRoles("admin", "teacher", "student"), getSectionsByClass);
 
-router.put("/:id", protect, authorizeRoles("admin"), updateSection);
+router.put("/:id", protect, authorizeRoles("admin", "teacher"), updateSection);
 
-router.delete("/:id", protect, authorizeRoles("admin"), deleteSection);
+router.delete("/:id", protect, authorizeRoles("admin", "teacher"), deleteSection);
 export default router;
